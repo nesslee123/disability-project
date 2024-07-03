@@ -1,0 +1,3 @@
+1. We plan to analyze the accessibility of UCLA's campus for students with disabilities. More specifically, we plan on exploring how easily people are able to get around throughout UCLA's campus, including buildings, walkways, etc.
+2. Our mapplication platform strives to uplift the voices of disabled students here at UCLA and allow them to share their experiences navigating through campus, any challenges they may have faced, and suggestions or things they feel could be improved on.
+3. Some technical issues that we may face with our mapplication are aquiring a sufficient number of surveys. An ethical issue we may have is striving to not project personal biases when creating and sending out surveys to ensure that we have a fully encompassing and objective mapplication. 
