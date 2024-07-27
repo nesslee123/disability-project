@@ -1,0 +1,107 @@
+* {
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #e399c8;
+}
+
+html, body {
+    height: 80vh;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-areas: 
+        "header" 
+        "main"  
+        "footer"; 
+    grid-template-rows: auto 1fr auto;
+    color: #640642;
+}
+
+main {
+    display: grid;
+    grid-template-areas:
+        "portfolio map";
+    grid-template-columns: 1fr 1fr;
+}
+
+header { 
+    grid-area: header;
+    font-size: xx-large;
+    color: #b70a77b5;
+}
+
+main {
+    grid-area: main;
+}
+.portfolio {
+    grid-area: portfolio;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #b70a787c;
+}
+
+#map { 
+    grid-area: map;
+    height: 80vh;
+}
+
+#footer {
+    grid-area: footer;
+    padding: 5px;
+    background-color: #b70a77b5;
+    color: #fff;
+    text-align: center;
+    color: #e399c8;
+    margin-top: 1rem;
+}
+
+.marker-FacedBarrier, .marker-NoBarrierFaced {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.marker-FacedBarrier{
+    background-color: green;
+}
+
+.marker-NoBarrierFaced{
+    background-color: #ff0000;
+}
+
+#FacedBarrier:checked + label {
+    color: green;
+}
+
+#NoBarrierFaced:checked + label {
+    color: red;
+}
+
+#contents{
+    grid-area: contents;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-right: 1rem;
+    background-color: #b70a77b5;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.maplibregl-popup{
+    max-height: 200px; /* Adjust the height as needed */
+    overflow-y: auto;
+}
