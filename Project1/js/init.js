@@ -18,7 +18,7 @@ function countLocation(data){
     // and then if the location exists, we will add one to the count
     // and if it doesn't exist we will add the new key
     let locationExists = false;
-
+    
     // Loop through the array to find the location using .forEach()
     locationsArray.forEach(item => {
         if (item.location === location) {
