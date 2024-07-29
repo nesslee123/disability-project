@@ -8,9 +8,12 @@ const map = new maplibregl.Map({
 });
 
 let locationsArray = [];
-
-function countLocation(location){
-
+let allData = [];
+function countLocation(data){
+    let location = data["Based on your answer above, choose a region on campus that makes you feel this way."];
+    let accessibility = data["How would you describe your overall feelings regarding accessibility on UCLA's campus? "];
+    console.log(accessibility);
+    // How would you describe your overall feelings regarding accessibility on UCLA's campus? 
     // we are going to create an array of objects, where location is the key
     // and then if the location exists, we will add one to the count
     // and if it doesn't exist we will add the new key
@@ -19,15 +22,35 @@ function countLocation(location){
     // Loop through the array to find the location using .forEach()
     locationsArray.forEach(item => {
         if (item.location === location) {
+            if (accessibility == "Positive"){
+                item.positiveResponses += 1;
+            }
+            else if (accessibility == "Neutral"){
+                item.neutralResponses += 1;
+            }
+            else if (accessibility == "Negative"){
+                item.negativeResponses += 1;
+            }
+
             // If location exists, increment the count
-            item.count += 1;
+            item.totalResponses += 1;
             locationExists = true;
         }
     });
 
     // If location does not exist, add a new object with count 1
     if (!locationExists) {
-        locationsArray.push({ location: location, count: 1 });
+        let newLocation = { location: location, positiveResponses: 0, neutralResponses: 0, negativeResponses: 0, totalResponses: 1 };
+        if (accessibility == "Positive"){
+            newLocation.positiveResponses += 1;
+        }
+        else if (accessibility == "Neutral"){
+            newLocation.neutralResponses += 1;
+        }
+        else if (accessibility == "Negative"){
+            newLocation.negativeResponses += 1;
+        }
+        locationsArray.push(newLocation);
     }
     console.log(locationsArray);
 }
@@ -86,7 +109,19 @@ function createButtons(lat,lng,title){
     document.getElementById("contents").appendChild(newButton);
 }
 
-const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9kU2mpuGh_rAfX4JHXQWB6_A0vENdZD3y6eW2j16BM54PWVIlTwuovsj4z2ru13cf0O57YU2HQiKT/pub?output=csv"
+function createCards(data){
+    console.log('creating cards');
+    document.getElementById("contents").innerHTML = "";
+    data.forEach(item => {
+        const newCard = document.createElement("div");
+        newCard.className = "card";
+        newCard.innerHTML = `<h2>${item[`Timestamp`]}</h2>`;
+        document.getElementById("contents").appendChild(newCard);
+    }
+    )
+}
+
+const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSfnuIWnPJ3APbwzIBZ5HzkL0l1hyyYxOFj2MExy1iu4cr0nS-Q8zLtVk34b0XMumRCuUvzc1Wav9HZ/pub?output=csv"
 
 map.on('load', function() {
     createFilterUI();
@@ -94,22 +129,68 @@ map.on('load', function() {
         download: true, 
         header: true, 
         complete: function(results) {
+            // 1. get all the current survey data
            processData(results.data);
         }
     });
-    fetch("campusucla.geojson")
-        .then(response => response.json())
-        .then(data => {
-            processPolygon(data);
-    });
+    // wait for the process to finish
+    locationsArray.forEach(location => {
+        console.log('location.location');
+        console.log(location.location);
+    });    
 });
 
+
+
+function processData(results) {
+    results.forEach(data => {
+        countLocation(data)
+        allData.push(data);
+    })
+}
+
+function getColor(location){
+    let positive = location.positiveResponses || 0;
+    let neutral = location.neutralResponses || 0;
+    let negative = location.negativeResponses || 0;
+    
+    // if the value is positive, return green
+    if (positive >= neutral && positive >= negative){
+        return "#00FF00";
+    }
+    // if the value is mostly neutral, return yellow
+    else if (neutral >= positive && neutral >= negative){
+        return "#FFFF00";
+    }
+    // if the value is mostly negative, return red
+    else if (negative >= positive && negative >= neutral){
+        return "#FF0000";
+    }
+    // this default color
+    else{
+        return "#000000";
+    }
+}
+
+function assignColorForLocations(location){
+    console.log("hey this location is: ", location);
+};
+
 function processPolygon(results){
-    console.log(results)
     map.addSource('polygon', {
         'type': 'geojson',
         'data': results
     });
+
+    // this will be the final colors of the polygons
+    let locationColors = {};
+    // THIS IS WHERE IT SEPaRATES
+    locationsArray.forEach(location => assignColorForLocations(location));
+    locationsArray.forEach(location => {
+        locationColors[location.location] = getColor(location);
+    });
+    
+    let locationColorPairs = Object.entries(locationColors).flat();
 
     // this will the polygon all one color! BOOO!
     // you need to you fill-it (paint) with the counts
@@ -120,11 +201,35 @@ function processPolygon(results){
         'source': 'polygon',
         'layout': {},
         'paint': {
-            'fill-color': '#088',
-            'fill-opacity': 0.1
+            'fill-color': [
+                'match',
+                ['get', 'location'], // Assuming 'location' is a property in your GeoJSON features
+                ...locationColorPairs,
+                '#888888' // Default color if no match is found
+            ],
+            'fill-opacity': 0.5
         }
     });
+    map.on('click','polygon', function(event){
+        const properties = event.features[0].properties;
+        // what is the location that was clicked?
+        let clickedLocation = properties.location;
+        let clickedLocationData = allData.find(location => location['Based on your answer above, choose a region on campus that makes you feel this way.'] == clickedLocation);
+        createCards([clickedLocationData]);
 
+        new maplibregl.Popup()
+            .setLngLat(event.lngLat)
+            .setHTML(`<h2>${properties.location}</h2>`)
+            .addTo(map);
+    })
+    
+    map.on('mouseenter', 'polygon', function() {
+        map.getCanvas().style.cursor = 'pointer';
+    }
+    );
+    map.on('mouseleave', 'polygon', function() {
+        map.getCanvas().style.cursor = '';
+    });
 };
 
 function createCheckboxForCategory (category,filterGroup) {
@@ -174,5 +279,19 @@ function toggleMarkersVisibility(category, isVisible) {
     const markers = document.querySelectorAll(`.marker-${category}`);
     markers.forEach(marker => {
         marker.style.display = isVisible ? '' : 'none';
+    });
+}
+
+setTimeout(() =>{
+    runTheLoopOnTimeout();
+},2000);
+
+function runTheLoopOnTimeout(){
+    fetch("campusucla.geojson")
+        .then(response => response.json())
+        .then(data => {
+            // 2. style the polygon with the survey data
+            
+            processPolygon(data);
     });
 }
