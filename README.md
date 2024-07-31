@@ -3,19 +3,19 @@
 > Our platform focuses on sharing the experiences of students with mobile disabilities and their feelings toward accessibility on UCLA's campus. We provide a space where students with mobile impairments feel comfortable sharing their experiences with accessibility throughout campus. 
 
 ## Table of Contents
-    [Objectives](https://github.com/nesslee123/disability-project/blob/main/README.md#objectives)
-    [Who Is Empowered?](https://github.com/nesslee123/disability-project/blob/main/README.md#who-is-empowered?)
-    [Technologies Used](https://github.com/nesslee123/disability-project/blob/main/README.md#technologies-used)
-    [How It Can Be Repurposed](https://github.com/nesslee123/disability-project/blob/main/README.md#how-it-can-be-repurposed)
-    [Features](https://github.com/nesslee123/disability-project/blob/main/README.md#features)
-    [Screenshots](https://github.com/nesslee123/disability-project/blob/main/README.md#screenshots)
+* [Objectives](#objectives)
+* [Who Is Empowered](#who-is-empowered)
+* [Technologies Used](#technologies-used)
+* [How It Can Be Repurposed](#how-it-can-be-repurposed)
+* [Features](#features)
+* [Screenshots](#screenshots)
 
 ## Objectives
 - Oftentimes, students with mobile disabilities are overlooked and their voices are not considered by administration or institutions, so we hope to provide a platform for these students to share their experiences and thoughts on accessibility within UCLA’s campus. This allows them to contribute their stories to a collective map. 
 - We plan to anonymously survey students with mobile disabilities about their overall feelings on accessibility throughout campus, whether they feel positively, negatively or neutral. We will then ask them to choose which region of campus, either North Campus, South Campus, or the Hill, made them feel this way and have them share their experiences regarding why.  
 - We plan to create a website with an interactive map divided into these 3 regions of campus, that will both visualize and showcase the personal stories of different students with mobile disabilities at those locations.
 
-## Who Is Empowered?
+## Who Is Empowered
 
 - We aim to empower and uplift the voices of students with mobile disabilities at UCLA by providing a safe space for them to express their overall thoughts on campus accessibility and share their experiences with specific regions of campus.
     
