@@ -6,25 +6,53 @@
         <link rel="shortcut icon" href="#">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
 
     <body>
         <header>
             Is UCLA Really Accessible?
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM-hARre26M9zCV_0WGM6l2CHO2L4hihACnmk_FQeav94vuA/viewform?embedded=true" target="_blank">
-                    <button id="surveyButton">Please Take The Survey!</button>
+            <button id="myBtn">Overview</button>
+            <a href='file.html'>
+                <button id="aboutButton">About</button>
             </a>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM-hARre26M9zCV_0WGM6l2CHO2L4hihACnmk_FQeav94vuA/viewform?embedded=true" target="_blank">
+                    <button id="surveyButton">Share Your Experience</button>
+            </a>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h1>Is UCLA Really Accessible?</h1>
+                                <h2>Students with mobile disabilities are often overlooked and not considered by institutions when designing buildings or routes, which can greatly affect accessibility for these individuals. Here at UCLA, this is especially prominent because there are many hills, stairs, insufficient ramps, malfunctioning elevators, and inconvenient walkways that are not inclusive towards students with mobile impairments. Due to this, this platform provides students with mobile disabilities/impairments a place where they can share their experiences with accessibility on campus.</h2>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM-hARre26M9zCV_0WGM6l2CHO2L4hihACnmk_FQeav94vuA/viewform?embedded=true" target="_blank">
+                                    <button id="surveyButton">Share Your Experience</button>
+                            </a>
+                            </div>
+                        </div>
         </header>
 
         <main>
-            <div class="portfolio">
-                <div id="contents">
-                    <div id="legend"></div>
+                <div class="portfolio">
+                <div id="chart-container">
+                    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                </div>
+
+                <div id="leftcontent">
+                    <h5>Student Experiences</h5>
+                    <div id="contents" class="card-container">
+    
+                    </div>
+                    <button class ="Chart" onclick="showChart()">Show Chart</button> 
                 </div>
             </div>
-            <div id="map"></div>
+            <div class="map-container">
+                <div id="map"></div>
+                <div id="legend"></div>
+            </div>
         </main>
         <div id="footer">
             Copyright(2024)

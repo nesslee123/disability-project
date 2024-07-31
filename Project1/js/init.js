@@ -1,4 +1,4 @@
-let mapOptions = {'centerLngLat': [-118.4472777,34.0709459],'startingZoomLevel':15}
+let mapOptions = {'centerLngLat': [-118.4472777,34.0709459],'startingZoomLevel':14}
 
 const map = new maplibregl.Map({
     container: 'map',
@@ -9,6 +9,43 @@ const map = new maplibregl.Map({
 
 let locationsArray = [];
 let allData = [];
+
+function summarizeResponses(){
+    let summarizedData = {"Positive": 0, "Neutral": 0, "Negative": 0};
+    locationsArray.forEach(location => {
+        summarizedData["Positive"] += location.positiveResponses;
+        summarizedData["Neutral"] += location.neutralResponses;
+        summarizedData["Negative"] += location.negativeResponses;
+    });
+    return summarizedData; 
+}
+function addChart(){
+    const xValues = ["Positive Responses", "Negative Responses", "Neutral Responses"]
+    const yValues = [summarizedData.Positive, summarizedData.Negative, summarizedData.Neutral];
+    const barColors = ["green", "red", "yellow"];
+
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "FIX!"
+    },
+    hover: {mode: null},
+    tooltips: {enabled: false}
+    }
+});
+}
+
 function countLocation(data){
     let location = data["Based on your answer above, choose a region on campus that makes you feel this way."];
     let accessibility = data["How would you describe your overall feelings regarding accessibility on UCLA's campus? "];
@@ -113,9 +150,17 @@ function createCards(data){
     console.log('creating cards');
     document.getElementById("contents").innerHTML = "";
     data.forEach(item => {
+        console.log(item)
         const newCard = document.createElement("div");
         newCard.className = "card";
-        newCard.innerHTML = `<h2>${item[`Timestamp`]}</h2>`;
+        newCard.innerHTML = `<h4>Mobile disability/impairment:</h4>
+                            <p>${item[`How would you describe your mobile disability/impairment? `]}</p>
+                            <h4>How would you describe your overall feelings regarding accessibility on UCLA\'s campus?</h4>
+                            <p>${item[`How would you describe your overall feelings regarding accessibility on UCLA\'s campus? `]}</p>
+                            <h4>Explain why:</h4>
+                            <p>${item[`Explain why this region makes you feel this way.`]}</p>`;
+                             
+        ;
         document.getElementById("contents").appendChild(newCard);
     }
     )
@@ -140,12 +185,15 @@ map.on('load', function() {
     });    
 });
 
-
+let summarizedData;
 
 function processData(results) {
     results.forEach(data => {
         countLocation(data)
         allData.push(data);
+        summarizedData = summarizeResponses();
+        // this call the create chart function
+        addChart();
     })
 }
 
@@ -160,7 +208,7 @@ function getColor(location){
     }
     // if the value is mostly neutral, return yellow
     else if (neutral >= positive && neutral >= negative){
-        return "#FFFF00";
+        return "#FFFF00F";
     }
     // if the value is mostly negative, return red
     else if (negative >= positive && negative >= neutral){
@@ -211,15 +259,22 @@ function processPolygon(results){
         }
     });
     map.on('click','polygon', function(event){
+        hideChart()
         const properties = event.features[0].properties;
         // what is the location that was clicked?
         let clickedLocation = properties.location;
-        let clickedLocationData = allData.find(location => location['Based on your answer above, choose a region on campus that makes you feel this way.'] == clickedLocation);
-        createCards([clickedLocationData]);
-
+        let clickedLocationData = allData.filter(location => location['Based on your answer above, choose a region on campus that makes you feel this way.'] == clickedLocation);
+        createCards(clickedLocationData);
+        leftcontent.style.display = "block";
+        let locationDescription = getLocationDescription(clickedLocation);
+        // you should use the locationsArray to get the different counts here 
+        // and just add it to the popup
+        let readableDataObject = getReadableLocationData(clickedLocation);
+        let countMessages = ` Positive Responses: ${readableDataObject["Positive Responses"]},<br>Negative Responses: ${readableDataObject["Negative Responses"]},<br>Neutral Responses: ${readableDataObject["Neutral Responses"]}`
+        let message = `<h1>${clickedLocation}</h1><h2 style="background-color:white,color:black">${countMessages}</h2> <p style="background-color:white,color:black"> ${locationDescription}</p>`
         new maplibregl.Popup()
             .setLngLat(event.lngLat)
-            .setHTML(`<h2>${properties.location}</h2>`)
+            .setHTML(message)
             .addTo(map);
     })
     
@@ -232,38 +287,72 @@ function processPolygon(results){
     });
 };
 
-function createCheckboxForCategory (category,filterGroup) {
+function hideChart(){
+    document.getElementById("myChart").style.display = "none";
+}
+
+function showChart(){
+    document.getElementById("myChart").style.display = "block";
+    document.getElementById("leftcontent").style.display = "none";
+}
+
+const locationDescription = {
+    "The Hill":"This area of campus is frequented by students going to the dorms and dining halls on campus.",
+    "North Campus":"This area of campus is frequented by students taking social science and humanities classes.",
+    "South Campus":"This area of campus is frequented by students taking physical and life science classes.",
+
+}
+
+let readableLocationsKeys = {
+    "positiveResponses": "Positive Responses",
+    "neutralResponses": "Neutral Responses",
+    "negativeResponses": "Negative Responses",
+}
+
+function getReadableLocationData(location){
+    let readableLocationData = {"Positive Responses": 0, "Neutral Responses": 0, "Negative Responses": 0};
+    console.log(location);
+    let alllocation = locationsArray.filter(thislocation => thislocation.location == location);
+    let thisLocation = alllocation[0];
+    console.log(thisLocation);
+    if (thisLocation.positiveResponses){
+        readableLocationData["Positive Responses"] = thisLocation.positiveResponses;
+    }
+    if (thisLocation.neutralResponses){
+        readableLocationData["Neutral Responses"] = thisLocation.neutralResponses;
+    }
+    if (thisLocation.negativeResponses){
+        readableLocationData["Negative Responses"] = thisLocation.negativeResponses;
+    }
+    
+    console.log(readableLocationData);
+    return readableLocationData;
+}
+function getLocationDescription(location){
+    return locationDescription[location];
+}
+
+function createCheckboxForCategory (category, filterGroup) {
     const container = document.createElement('div');
     container.style.display = 'grid';
-    container.style.gridTemplateColumns ='auto auto 1fr';
+    container.style.gridTemplateColumns = 'auto 1fr';
     container.style.alignItems = 'center';
     container.style.gap = '8px';
 
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.id = category;
-    input.checked = true;
-
     const label = document.createElement('label');
-    label.setAttribute('for', category);
     label.textContent = category;
 
     const markerLegend = document.createElement('div');
     markerLegend.className = `marker marker-${category}`;
 
-    container.appendChild(input);
+    container.appendChild(markerLegend);
     container.appendChild(label);
-    container.prepend(markerLegend);
 
     filterGroup.appendChild(container);
-
-    input.addEventListener('change', function(event) {
-        toggleMarkersVisibility(category, event.target.checked);
-    });
 }
 
 function createFilterUI() {
-    const categories = ["FacedBarrier", "NoBarrierFaced"];
+    const categories = ["Negative", "Positive", "Neutral"];
     const filterGroup = document.getElementById('filter-group') || document.createElement('div');
     filterGroup.setAttribute('id', 'filter-group');
     filterGroup.className = 'filter-group';
@@ -284,7 +373,7 @@ function toggleMarkersVisibility(category, isVisible) {
 
 setTimeout(() =>{
     runTheLoopOnTimeout();
-},2000);
+},2500);
 
 function runTheLoopOnTimeout(){
     fetch("campusucla.geojson")
@@ -295,3 +384,26 @@ function runTheLoopOnTimeout(){
             processPolygon(data);
     });
 }
+
+let modal = document.getElementById("myModal");
+let btn = document.getElementById("myBtn");
+let span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    modal.style.display = "block";
+});
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+

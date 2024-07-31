@@ -4,7 +4,8 @@
     {
       "type": "Feature",
       "properties": {
-        "location": "South Campus"
+        "location": "South Campus",
+        "message": "This area of campus is frequented by students taking physical and life science classes."
       },
       "geometry": {
         "coordinates": [
@@ -88,12 +89,14 @@
           ]
         ],
         "type": "Polygon"
-      }
+      },
+      "id": 0
     },
     {
       "type": "Feature",
       "properties": {
-        "location": "The Hill"
+        "location": "The Hill",
+        "message": "This area of campus is frequented by students going to the dorms and dining halls on campus."
       },
       "geometry": {
         "coordinates": [
@@ -185,12 +188,14 @@
           ]
         ],
         "type": "Polygon"
-      }
+      },
+      "id": 1
     },
     {
       "type": "Feature",
       "properties": {
-        "location": "North Campus"
+        "location": "North Campus",
+        "message": "This area of campus is frequented by students taking social science and humanities classes."
       },
       "geometry": {
         "coordinates": [
@@ -318,7 +323,8 @@
           ]
         ],
         "type": "Polygon"
-      }
+      },
+      "id": 2
     }
   ]
 }
