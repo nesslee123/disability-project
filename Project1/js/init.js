@@ -49,13 +49,8 @@ function countLocation(data){
     let location = data["Based on your answer above, choose a region on campus that makes you feel this way."];
     let accessibility = data["How would you describe your overall feelings regarding accessibility on UCLA's campus? "];
     console.log(accessibility);
-    // How would you describe your overall feelings regarding accessibility on UCLA's campus? 
-    // we are going to create an array of objects, where location is the key
-    // and then if the location exists, we will add one to the count
-    // and if it doesn't exist we will add the new key
     let locationExists = false;
     
-    // Loop through the array to find the location using .forEach()
     locationsArray.forEach(item => {
         if (item.location === location) {
             if (accessibility == "Positive"){
@@ -68,13 +63,11 @@ function countLocation(data){
                 item.negativeResponses += 1;
             }
 
-            // If location exists, increment the count
             item.totalResponses += 1;
             locationExists = true;
         }
     });
 
-    // If location does not exist, add a new object with count 1
     if (!locationExists) {
         let newLocation = { location: location, positiveResponses: 0, neutralResponses: 0, negativeResponses: 0, totalResponses: 1 };
         if (accessibility == "Positive"){
@@ -89,60 +82,6 @@ function countLocation(data){
         locationsArray.push(newLocation);
     }
     console.log(locationsArray);
-}
-
-function addMarker(data) {
-    let longitude = data['lng'];
-    let latitude = data['lat'];
-    let accessibleLocation = data["What location on UCLA's campus do you find most accessible?"];
-    let cleanedLocation = accessibleLocation.toLowerCase().trim().replace(" ", "");
-    console.log("not cleaned is: ", accessibleLocation, "and cleaned is ", cleanedLocation);
-    // probably you want to use the location that you set in the survey (north, south campus, the hill, etc.)
-    countLocation(cleanedLocation);
-
-    let barrierFaced = data["Can you remember a situation where you faced a barrier to accessibility on UCLA's campus? "];
-    let whyAccessible = data['Why do you feel this way?    '];
-    let describeBarrier = data['Can you please describe the barrier you faced? '];
-    let accessView = data["Do you feel as if this barrier affects your view of UCLA's campus being accessible?"];
-    let describeView = data['Why do you feel this way? '];
-    let disability = data['How would you describe your mobile disability/impairment? '];
-    let category = barrierFaced == "Yes" ? "FacedBarrier" : "NoBarrierFaced";
-    let popup_message;
-    if (barrierFaced == "Yes"){
-        popup_message = `<h2>Most Accessible Location On Campus: ${accessibleLocation}</h2> <p>Why Do You Feel This Is The Most Accessible Location?: ${whyAccessible}</p> <h3>Barrier Faced On Campus: ${describeBarrier}</h3> <h4>Does this barrier affect your view of campus accessibility?: ${accessView}</h4> <p>Why Do You Feel This Affects Your View?: ${describeView}</p> <h5>How would you describe your mobile disability/impairment?: ${disability}</h5>`
-    }
-    else{
-        popup_message = `<h2>Most Accessible Location On Campus: ${accessibleLocation}</h2> <p>Why Do You Feel This Is The Most Accessible Location?: ${whyAccessible}</p> <h3>Currently, Have Not Faced A Barrier On Campus</h3> <h4>How would you describe your mobile disability/impairment?: ${disability}</h4>`
-    }
-
-    const newMarkerElement = document.createElement('div');
-
-    newMarkerElement.className = `marker marker-${category}`;
-    
-    new maplibregl.Marker({element:newMarkerElement})
-            .setLngLat([longitude, latitude])
-            .setPopup(new maplibregl.Popup()
-                .setHTML(popup_message))
-            .addTo(map)
-        createButtons(latitude,longitude,accessibleLocation);       
-}
-
-function createButtons(lat,lng,title){
-    if (!title){
-        return;
-    }
-
-    const newButton = document.createElement("button");
-    newButton.id = "button"+title; 
-    newButton.innerHTML = title;
-    newButton.setAttribute("lat",lat);
-    newButton.setAttribute("lng",lng);
-    newButton.addEventListener('click', function(){
-        map.flyTo({
-            center: [lng,lat],
-        })
-    })
-    document.getElementById("contents").appendChild(newButton);
 }
 
 function createCards(data){
@@ -173,11 +112,9 @@ map.on('load', function() {
         download: true, 
         header: true, 
         complete: function(results) {
-            // 1. get all the current survey data
            processData(results.data);
         }
     });
-    // wait for the process to finish
     locationsArray.forEach(location => {
         console.log('location.location');
         console.log(location.location);
@@ -191,7 +128,6 @@ function processData(results) {
         countLocation(data)
         allData.push(data);
         summarizedData = summarizeResponses();
-        // this call the create chart function
         addChart();
     })
 }
@@ -201,19 +137,15 @@ function getColor(location){
     let neutral = location.neutralResponses || 0;
     let negative = location.negativeResponses || 0;
     
-    // if the value is positive, return green
     if (positive >= neutral && positive >= negative){
         return "#00FF00";
     }
-    // if the value is mostly neutral, return yellow
     else if (neutral >= positive && neutral >= negative){
         return "#FFFF00F";
     }
-    // if the value is mostly negative, return red
     else if (negative >= positive && negative >= neutral){
         return "#FF0000";
     }
-    // this default color
     else{
         return "#000000";
     }
@@ -229,9 +161,7 @@ function processPolygon(results){
         'data': results
     });
 
-    // this will be the final colors of the polygons
     let locationColors = {};
-    // THIS IS WHERE IT SEPaRATES
     locationsArray.forEach(location => assignColorForLocations(location));
     locationsArray.forEach(location => {
         locationColors[location.location] = getColor(location);
@@ -239,9 +169,6 @@ function processPolygon(results){
     
     let locationColorPairs = Object.entries(locationColors).flat();
 
-    // this will the polygon all one color! BOOO!
-    // you need to you fill-it (paint) with the counts
-    // from locations in the `locationsArray`
     map.addLayer({
         'id': 'polygon',
         'type': 'fill',
@@ -250,9 +177,9 @@ function processPolygon(results){
         'paint': {
             'fill-color': [
                 'match',
-                ['get', 'location'], // Assuming 'location' is a property in your GeoJSON features
+                ['get', 'location'], 
                 ...locationColorPairs,
-                '#888888' // Default color if no match is found
+                '#888888' 
             ],
             'fill-opacity': 0.5
         }
@@ -260,14 +187,11 @@ function processPolygon(results){
     map.on('click','polygon', function(event){
         hideChart()
         const properties = event.features[0].properties;
-        // what is the location that was clicked?
         let clickedLocation = properties.location;
         let clickedLocationData = allData.filter(location => location['Based on your answer above, choose a region on campus that makes you feel this way.'] == clickedLocation);
         createCards(clickedLocationData);
         leftcontent.style.display = "block";
         let locationDescription = getLocationDescription(clickedLocation);
-        // you should use the locationsArray to get the different counts here 
-        // and just add it to the popup
         let readableDataObject = getReadableLocationData(clickedLocation);
         let countMessages = ` Positive Responses: ${readableDataObject["Positive Responses"]},<br>Negative Responses: ${readableDataObject["Negative Responses"]},<br>Neutral Responses: ${readableDataObject["Neutral Responses"]}`
         let message = `<h1>${clickedLocation}</h1><h2 style="background-color:white,color:black">${countMessages}</h2> <p style="background-color:white,color:black"> ${locationDescription}</p>`
@@ -337,16 +261,12 @@ function createCheckboxForCategory (category, filterGroup) {
     container.style.gridTemplateColumns = 'auto 1fr';
     container.style.alignItems = 'center';
     container.style.gap = '8px';
-
     const label = document.createElement('label');
     label.textContent = category;
-
     const markerLegend = document.createElement('div');
     markerLegend.className = `marker marker-${category}`;
-    
     container.appendChild(markerLegend);
     container.appendChild(label);
-
     filterGroup.appendChild(container);
 }
 
@@ -355,9 +275,7 @@ function createFilterUI() {
     const filterGroup = document.getElementById('filter-group') || document.createElement('div');
     filterGroup.setAttribute('id', 'filter-group');
     filterGroup.className = 'filter-group';
-
     document.getElementById("legend").appendChild(filterGroup);
-
     categories.forEach(category => {
         createCheckboxForCategory(category, filterGroup);
     });
@@ -377,9 +295,7 @@ setTimeout(() =>{
 function runTheLoopOnTimeout(){
     fetch("campusucla.geojson")
         .then(response => response.json())
-        .then(data => {
-            // 2. style the polygon with the survey data
-            
+        .then(data => {            
             processPolygon(data);
     });
 }
