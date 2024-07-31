@@ -51,17 +51,9 @@ Features
     Student Experiences With Accessibility (responses linked from survey)
 
 Screenshots
-
-    <img width="760" alt="Screen Shot 2024-07-31 at 2 43 46 AM" src="https://github.com/user-attachments/assets/7066e6c6-1810-4789-a8b7-2c89bc4bf209">
-
-    <img width="1210" alt="Screen Shot 2024-07-31 at 2 44 20 AM" src="https://github.com/user-attachments/assets/65cc0be5-f7ec-4f7d-9491-c4252ff94941">
-
-    <img width="1204" alt="Screen Shot 2024-07-31 at 2 44 37 AM" src="https://github.com/user-attachments/assets/c64b820e-596d-43ae-bfc6-62bd8280e3ce">
-
-    <img width="1188" alt="Screen Shot 2024-07-31 at 2 44 48 AM" src="https://github.com/user-attachments/assets/2e4325f3-abeb-4233-976f-d2ee85bb7c2d">
-
-    <img width="1205" alt="Screen Shot 2024-07-31 at 2 45 09 AM" src="https://github.com/user-attachments/assets/256912d1-b0ad-42cc-84ae-1cdcbbe1bf24">
-
-    <img width="1204" alt="Screen Shot 2024-07-31 at 2 45 19 AM" src="https://github.com/user-attachments/assets/3d3163dc-7aa6-48e5-95cf-8a27205c5d9b">
-
-    <img width="1210" alt="Screen Shot 2024-07-31 at 2 45 45 AM" src="https://github.com/user-attachments/assets/f05c0a76-d6dd-46d4-9f1e-febc642a9f2f">
+<img width="1210" alt="Screen Shot 2024-07-31 at 2 45 45 AM" src="https://github.com/user-attachments/assets/07225c7c-9d18-4619-969e-826d7c4c8108">
+<img width="1204" alt="Screen Shot 2024-07-31 at 2 45 19 AM" src="https://github.com/user-attachments/assets/5ea6bd8d-974b-4147-a898-24e99dc406f9">
+<img width="1205" alt="Screen Shot 2024-07-31 at 2 45 09 AM" src="https://github.com/user-attachments/assets/439a0719-d069-4a42-a2ac-a5ee401996f7">
+<img width="1188" alt="Screen Shot 2024-07-31 at 2 44 48 AM" src="https://github.com/user-attachments/assets/81154e59-e6b9-4f42-9d11-6a05457a6186">
+<img width="1204" alt="Screen Shot 2024-07-31 at 2 44 37 AM" src="https://github.com/user-attachments/assets/0df84b3b-9c3c-418e-b09e-e0611f16cfd6">
+<img width="1210" alt="Screen Shot 2024-07-31 at 2 44 20 AM" src="https://github.com/user-attachments/assets/e6154e42-1436-4bc8-bff3-ab70c83b7f5a">
