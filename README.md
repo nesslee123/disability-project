@@ -37,13 +37,13 @@
 
 ## Features
 
-    - Overview Modal
-    - About Page
-    - Share Your Experience Button (linked to survey)
-    - Interactive Chart
-    - Legend 
-    - Interactive Map
-    - Student Experiences With Accessibility (responses linked from survey)
+- Overview Modal
+- About Page
+- Share Your Experience Button (linked to survey)
+- Interactive Chart
+- Legend 
+- Interactive Map
+- Student Experiences With Accessibility (responses linked from survey)
 
 ## Screenshots
 <img width="1439" alt="Screen Shot 2024-07-31 at 10 54 10 AM" src="https://github.com/user-attachments/assets/49dc766f-6d75-4b2e-8b94-4a2d02d17cfd">
