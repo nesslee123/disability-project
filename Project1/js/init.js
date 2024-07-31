@@ -1,4 +1,4 @@
-let mapOptions = {'centerLngLat': [-118.4472777,34.0709459],'startingZoomLevel':14}
+let mapOptions = {'centerLngLat': [-118.446743,34.072571],'startingZoomLevel':14}
 
 const map = new maplibregl.Map({
     container: 'map',
@@ -38,10 +38,9 @@ new Chart("myChart", {
     legend: {display: false},
     title: {
       display: true,
-      text: "FIX!"
+      text: "Students' Sentiment Toward Campus Accessibility"
     },
-    hover: {mode: null},
-    tooltips: {enabled: false}
+    hover: {mode: null}
     }
 });
 }
@@ -344,7 +343,7 @@ function createCheckboxForCategory (category, filterGroup) {
 
     const markerLegend = document.createElement('div');
     markerLegend.className = `marker marker-${category}`;
-
+    
     container.appendChild(markerLegend);
     container.appendChild(label);
 
