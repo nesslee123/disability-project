@@ -3,12 +3,12 @@
 > Our platform focuses on sharing the experiences of students with mobile disabilities and their feelings toward accessibility on UCLA's campus. We provide a space where students with mobile impairments feel comfortable sharing their experiences with accessibility throughout campus. 
 
 ## Table of Contents
-    * [Objectives](https://github.com/nesslee123/disability-project/blob/main/README.md#objectives)
-    * [Who Is Empowered?](https://github.com/nesslee123/disability-project/blob/main/README.md#who-is-empowered?)
-    * [Technologies Used](https://github.com/nesslee123/disability-project/blob/main/README.md#technologies-used)
-    * [How It Can Be Repurposed](https://github.com/nesslee123/disability-project/blob/main/README.md#how-it-can-be-repurposed)
-    * [Features](https://github.com/nesslee123/disability-project/blob/main/README.md#features)
-    * [Screenshots](https://github.com/nesslee123/disability-project/blob/main/README.md#screenshots)
+    [Objectives](https://github.com/nesslee123/disability-project/blob/main/README.md#objectives)
+    [Who Is Empowered?](https://github.com/nesslee123/disability-project/blob/main/README.md#who-is-empowered?)
+    [Technologies Used](https://github.com/nesslee123/disability-project/blob/main/README.md#technologies-used)
+    [How It Can Be Repurposed](https://github.com/nesslee123/disability-project/blob/main/README.md#how-it-can-be-repurposed)
+    [Features](https://github.com/nesslee123/disability-project/blob/main/README.md#features)
+    [Screenshots](https://github.com/nesslee123/disability-project/blob/main/README.md#screenshots)
 
 ## Objectives
 - Oftentimes, students with mobile disabilities are overlooked and their voices are not considered by administration or institutions, so we hope to provide a platform for these students to share their experiences and thoughts on accessibility within UCLA’s campus. This allows them to contribute their stories to a collective map. 
