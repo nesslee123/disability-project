@@ -50,35 +50,33 @@ main {
     grid-area: portfolio;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     color: #003B5C;
 }
 
 .map-container {
     display: flex;
-    height: 100vh; /* Full height of the viewport */
+    height: 100vh; 
     padding-top: 2rem;
 }
 
 #map {
     flex: 1;
-    position: relative; /* To position the legend absolutely within the map */
-    background-color: lightgray; /* Just for visualization */
+    position: relative; 
+    background-color: lightgray; 
 }
 
 #legend {
     background-color:#8BB8E8;
-    padding: 0.5rem; /* Padding for the legend */
-    border: 1px solid #ccc; /* Border for the legend */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    max-width: 200px; /* Maximum width for the legend */
-    position: absolute; /* Position within the map */
-    /* the location */
-    top: 7.5rem; /* Distance from the top */
-    right: 2.2rem; /* Distance from the right */
+    padding: 0.5rem; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-size: 0.9rem; 
+    max-width: 200px; 
+    position: absolute; 
+    top: 7.5rem; 
+    right: 2.2rem; 
 }
 
 #footer {
@@ -109,18 +107,6 @@ main {
 .marker-Neutral{
     background-color: #fff00f;
 }
-
-/* #Positive:checked + label {
-    color: green;
-}
-
-#Negative:checked + label {
-    color: red;
-}
-
-#Neutral:checked + label {
-    color: yellow;
-} */
 
 #leftcontent{
     display: none;
@@ -360,6 +346,7 @@ header a{
     margin-left: 30rem;
     height: 100%;
     width: 100%;
+    color:#000000;
 }
 
 
