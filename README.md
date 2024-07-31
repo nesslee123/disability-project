@@ -51,9 +51,10 @@ Features
     Student Experiences With Accessibility (responses linked from survey)
 
 Screenshots
-<img width="1210" alt="Screen Shot 2024-07-31 at 2 45 45 AM" src="https://github.com/user-attachments/assets/07225c7c-9d18-4619-969e-826d7c4c8108">
-<img width="1204" alt="Screen Shot 2024-07-31 at 2 45 19 AM" src="https://github.com/user-attachments/assets/5ea6bd8d-974b-4147-a898-24e99dc406f9">
-<img width="1205" alt="Screen Shot 2024-07-31 at 2 45 09 AM" src="https://github.com/user-attachments/assets/439a0719-d069-4a42-a2ac-a5ee401996f7">
-<img width="1188" alt="Screen Shot 2024-07-31 at 2 44 48 AM" src="https://github.com/user-attachments/assets/81154e59-e6b9-4f42-9d11-6a05457a6186">
-<img width="1204" alt="Screen Shot 2024-07-31 at 2 44 37 AM" src="https://github.com/user-attachments/assets/0df84b3b-9c3c-418e-b09e-e0611f16cfd6">
-<img width="1210" alt="Screen Shot 2024-07-31 at 2 44 20 AM" src="https://github.com/user-attachments/assets/e6154e42-1436-4bc8-bff3-ab70c83b7f5a">
+<img width="1439" alt="Screen Shot 2024-07-31 at 10 54 10 AM" src="https://github.com/user-attachments/assets/49dc766f-6d75-4b2e-8b94-4a2d02d17cfd">
+<img width="1437" alt="Screen Shot 2024-07-31 at 10 53 13 AM" src="https://github.com/user-attachments/assets/8b892a4c-3c10-4e8d-9f76-5923610ee130">
+<img width="500" alt="Screen Shot 2024-07-31 at 10 53 25 AM" src="https://github.com/user-attachments/assets/4d327f13-eed6-4aad-94dc-5b06e8300583">
+<img width="1430" alt="Screen Shot 2024-07-31 at 10 53 38 AM" src="https://github.com/user-attachments/assets/75a9a2fb-1e6f-4604-8dc7-94dd5dd6954a">
+<img width="1165" alt="Screen Shot 2024-07-31 at 10 58 37 AM" src="https://github.com/user-attachments/assets/12c0ea5c-79d0-4a47-b1ed-0dd7ea5d37ca">
+<img width="1223" alt="Screen Shot 2024-07-31 at 10 58 53 AM" src="https://github.com/user-attachments/assets/ed90cab6-0b07-420b-acb2-7cba7aa2a8d9">
+<img width="1210" alt="Screen Shot 2024-07-31 at 2 45 45 AM" src="https://github.com/user-attachments/assets/474202ff-d13a-43fb-9b5b-79e2e25f4283">
