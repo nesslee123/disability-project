@@ -4,11 +4,11 @@
 
 ## Table of Contents
     * [Objectives](#Objectives)
-    * [Who Is Empowered?](#Who-Is-Empowered?)
-    * [Technologies Used](#Technologies-Used)
-    * [How It Can Be Repurposed](#How-It-Can-Be-Repurposed)
-    * [Features](#Features)
-    * [Screenshots](#Screenshots)
+    * [Who Is Empowered?](#who-is-empowered?)
+    * [Technologies Used](#technologies-used)
+    * [How It Can Be Repurposed](#how-it-can-be-repurposed)
+    * [Features](#features)
+    * [Screenshots](#screenshots)
 
 ## Objectives
 - Oftentimes, students with mobile disabilities are overlooked and their voices are not considered by administration or institutions, so we hope to provide a platform for these students to share their experiences and thoughts on accessibility within UCLA’s campus. This allows them to contribute their stories to a collective map. 
